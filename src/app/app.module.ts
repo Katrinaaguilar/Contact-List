@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 var firebaseConfig = {
   apiKey: "",
