@@ -3,17 +3,16 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable }  from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-interface User {
+interface Contact {
   FirstName: string;
   LastName: string;
   Mobile: number;
   PhoneNumber: number;
   Email: string;
   Address: string;
-  userDoc: AngularFirestoreDocument<User>;
-  user: Observable<User>;
+ 
 }
-interface Postid extends User{
+interface Postid extends Contact{
   id: string;
 }
 
@@ -26,41 +25,46 @@ interface Postid extends User{
 
 })
 export class AppComponent {
-  userCol: AngularFirestoreCollection<User>;
-  user: Observable<User[]>;
+  contactCol: AngularFirestoreCollection<Contact>;
+  contact: Observable<Contact[]>;
 
-  User: any;
+  Contact: any;
   FirstName: string;
   LastName: string;
   Mobile: number;
   PhoneNumber: number;
   Email: string;
   Address: string;
+  contactDoc: AngularFirestoreDocument<Contact>;
+ // contact: Observable<Contact>;
 
  constructor(private afs: AngularFirestore){}
 
   ngOnInit() {
-    this.userCol = this.afs.collection('user');
+    this.contactCol = this.afs.collection('contact');
     //this.user = this.userCol.valueChanges();
-    this.User = this.userCol.snapshotChanges()
+    this.Contact = this.contactCol.snapshotChanges()
 
     .map(actions => {
       return actions.map( a => {
-        const data = a.payload.doc.data() as User;
+        const data = a.payload.doc.data() as Contact;
         const id = a.payload.doc.id;
         return { id, data };
       });
     });
 
   }
-  addUser(){
+  addContact(){
   
-    this.afs.collection('User').add({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
-    this.afs.collection('User').doc('my-customer-id').set({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
+    this.afs.collection('Contact').add({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
+    this.afs.collection('Contact').doc('my-customer-id').set({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
   }
-  getUser(UserId){
-    this.userDoc = this.afs.doc('user/'+UserId);
-    this.user = this.userDoc.valueChanges();
+  getContact(ContactId){
+    this.contactDoc = this.afs.doc('contact/'+ContactId);
+   // this.contact = this.contactDoc.valueChanges();
+  }
+  deleteContact(contactId){
+    this.afs.doc('contact/' + contactId).delete();
   }
  
 }
