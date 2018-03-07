@@ -10,6 +10,8 @@ interface User {
   PhoneNumber: number;
   Email: string;
   Address: string;
+  userDoc: AngularFirestoreDocument<User>;
+  user: Observable<User>;
 }
 interface Postid extends User{
   id: string;
@@ -19,7 +21,9 @@ interface Postid extends User{
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+
+
 })
 export class AppComponent {
   userCol: AngularFirestoreCollection<User>;
@@ -54,6 +58,9 @@ export class AppComponent {
     this.afs.collection('User').add({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
     this.afs.collection('User').doc('my-customer-id').set({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
   }
-  
+  getUser(UserId){
+    this.userDoc = this.afs.doc('user/'+UserId);
+    this.user = this.userDoc.valueChanges();
+  }
  
 }
