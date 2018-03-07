@@ -1,8 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
 import { AppComponent } from './app.component';
+
+var firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  databaseUrl: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
+};
 
 
 @NgModule({
@@ -10,7 +19,9 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
