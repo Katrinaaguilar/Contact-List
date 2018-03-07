@@ -12,8 +12,10 @@ interface Contact {
   Address: string;
  
 }
-interface Postid extends Contact{
+interface ContactId extends Contact{
   id: string;
+
+  contacts: any;
 }
 
 
@@ -25,10 +27,10 @@ interface Postid extends Contact{
 
 })
 export class AppComponent {
-  contactCol: AngularFirestoreCollection<Contact>;
-  contact: Observable<Contact[]>;
+  contactsCol: AngularFirestoreCollection<Contact>;
+  contacts: Observable<Contact[]>;
 
-  Contact: any;
+  
   FirstName: string;
   LastName: string;
   Mobile: number;
@@ -36,14 +38,14 @@ export class AppComponent {
   Email: string;
   Address: string;
   contactDoc: AngularFirestoreDocument<Contact>;
- // contact: Observable<Contact>;
+  Contact: Observable<Contact>;
 
  constructor(private afs: AngularFirestore){}
 
   ngOnInit() {
-    this.contactCol = this.afs.collection('contact');
+    this.contactsCol = this.afs.collection('contacts');
     //this.user = this.userCol.valueChanges();
-    this.Contact = this.contactCol.snapshotChanges()
+    this.contacts = this.contactsCol.snapshotChanges()
 
     .map(actions => {
       return actions.map( a => {
@@ -56,15 +58,15 @@ export class AppComponent {
   }
   addContact(){
   
-    this.afs.collection('Contact').add({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
-    this.afs.collection('Contact').doc('my-customer-id').set({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
+    //this.afs.collection('Contact').add({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
+    this.afs.collection('contacts').doc('my-custom-id').set({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
   }
-  getContact(ContactId){
-    this.contactDoc = this.afs.doc('contact/'+ContactId);
-   // this.contact = this.contactDoc.valueChanges();
+  getContact(contactId){
+    this.contactDoc = this.afs.doc('contacts/'+ contactId);
+    this.contact = this.contactDoc.valueChanges();
   }
-  deleteContact(contactId){
-    this.afs.doc('contact/' + contactId).delete();
+  deleteContact(contactsId){
+    this.afs.doc('contacts/' + contactsId).delete();
   }
  
 }

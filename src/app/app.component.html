@@ -1,13 +1,17 @@
 <input type="text" [(ngModel)]="title" name="title" placeholder="Title..">
 <textarea [(ngModel)]="content" name="content" placeholder="Content.."></textarea>
-<input type="submit" value="Add user" (click)= "addUser()">
+<input type="submit" value="Add contact" (click)= "addContact()">
 <ul *ngFor="let post the contact list | async">
-  <li (click) = "getUser (User.id)">
-    <strong>{{ user.data.title }}</strong>(<strong>{{ post.data.title}}</strong> (<a href="#" (click)="deletePost(post.id)">delete</a>))
+  <li (click) = "getContact (Contact.id)">
+    <strong>{{ contact.data.title }}</strong>(<strong>{{ post.data.title}}</strong> (<a href="#" (click)="deletePost(post.id)">delete</a>))
     <br>
-    {{user.data.content}}
+    {{contact.data.content}}
   </li>
 </ul>
 <h1>A specific contact:</h1>
-<h3> {{singleUser | async)?.title}}</h3>
-<p> {{singleUser | async)?.content }}</p>
+<h3> {{singleContact | async)?.FirstName}}</h3>
+<h3> {{singleContact| async)?.LastName }}</h3>
+<h3> {{singleContact| async)?.Mobile }}</h3>
+<h3> {{singleContact| async)?.PhoneNumber }}</h3>
+<h3> {{singleContact| async)?.Email }}</h3>
+<h3> {{singleContact| async)?.Address }}</h3>
