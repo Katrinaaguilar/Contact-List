@@ -1,17 +1,26 @@
-<input type="text" [(ngModel)]="title" name="title" placeholder="Title..">
-<textarea [(ngModel)]="content" name="content" placeholder="Content.."></textarea>
-<input type="submit" value="Add contact" (click)= "addContact()">
+<input type="text" [(ngModel)]="First Name" name="FirstName" placeholder="Enter your first name">
+<input type="text" [(ngModel)]="Last Name" name="LastName" placeholder="Enter your last name">
+<input type="text" [(ngModel)]="Mobile" name="Mobile" placeholder="1234567">
+<input type="text" [(ngModel)]="Phone Number" name="PhoneNumber" placeholder="1234567890">
+<input type="text" [(ngModel)]="E-mail" name="Email" placeholder="Enter your email">
+<textarea [(ngModel)]="Address" name="Address" placeholder="Enter your address"></textarea>
+<input type="submit" value="Add a contact" (click)= "addContact()">
 <ul *ngFor="let post the contact list | async">
-  <li (click) = "getContact (Contact.id)">
-    <strong>{{ contact.data.title }}</strong>(<strong>{{ post.data.title}}</strong> (<a href="#" (click)="deletePost(post.id)">delete</a>))
+  <li (click) = "getContact (contact.id)">
+    <strong>{{ contact.data.FirstName}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
+    <strong>{{ contact.data.LastName}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
+    <strong>{{ contact.data.Mobile}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
+    <strong>{{ contact.data.PhoneNumber}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
+    <strong>{{ contact.data.Email}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
+    <strong>{{ contact.data.Address}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
     <br>
-    {{contact.data.content}}
+    {{contact.data.Address}}
   </li>
 </ul>
 <h1>A specific contact:</h1>
-<h3> {{singleContact | async)?.FirstName}}</h3>
-<h3> {{singleContact| async)?.LastName }}</h3>
-<h3> {{singleContact| async)?.Mobile }}</h3>
-<h3> {{singleContact| async)?.PhoneNumber }}</h3>
-<h3> {{singleContact| async)?.Email }}</h3>
-<h3> {{singleContact| async)?.Address }}</h3>
+<h3> {{contact | async)?.FirstName}}</h3>
+<h3> {{contact| async)?.LastName }}</h3>
+<h3> {{contact| async)?.Mobile }}</h3>
+<h3> {{contact| async)?.PhoneNumber }}</h3>
+<h3> {{contact| async)?.Email }}</h3>
+<p> {{contact| async)?.Address }}</p>

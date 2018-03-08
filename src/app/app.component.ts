@@ -15,7 +15,7 @@ interface Contact {
 interface ContactId extends Contact{
   id: string;
 
-  contacts: any;
+  
 }
 
 
@@ -28,23 +28,25 @@ interface ContactId extends Contact{
 })
 export class AppComponent {
   contactsCol: AngularFirestoreCollection<Contact>;
-  contacts: Observable<Contact[]>;
+  contacts: any;
 
-  
   FirstName: string;
   LastName: string;
   Mobile: number;
   PhoneNumber: number;
   Email: string;
   Address: string;
-  contactDoc: AngularFirestoreDocument<Contact>;
-  Contact: Observable<Contact>;
 
- constructor(private afs: AngularFirestore){}
+  contactDoc: AngularFirestoreDocument<Contact>;
+  contact: Observable<Contact>;
+
+ constructor(private afs: AngularFirestore){
+
+ }
 
   ngOnInit() {
     this.contactsCol = this.afs.collection('contacts');
-    //this.user = this.userCol.valueChanges();
+    //this.contacts = this.contactsCol.valueChanges();
     this.contacts = this.contactsCol.snapshotChanges()
 
     .map(actions => {
@@ -58,8 +60,8 @@ export class AppComponent {
   }
   addContact(){
   
-    //this.afs.collection('Contact').add({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
-    this.afs.collection('contacts').doc('my-custom-id').set({'First Name': this.FirstName, 'Last Name': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
+    //this.afs.collection('contacts').add({'FirstName': this.FirstName, 'LastName': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
+    this.afs.collection('contacts').doc('my-custom-id').set({'FirstName': this.FirstName, 'LastName': this.LastName, 'Mobile': this.Mobile, 'PhoneNumber': this.PhoneNumber, 'Email': this.Email, 'Address': this.Address});
   }
   getContact(contactId){
     this.contactDoc = this.afs.doc('contacts/'+ contactId);
