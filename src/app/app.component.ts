@@ -4,10 +4,10 @@ import { Observable }  from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 interface Contact {
-  FirstName: string;
-  LastName: string;
+  Firstname: string;
+  Lastname: string;
   Mobile: number;
-  PhoneNumber: number;
+  Phonenumber: number;
   Email: string;
   Address: string;
  
@@ -15,10 +15,7 @@ interface Contact {
 interface ContactId extends Contact{
   id: string;
 
-  
 }
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,10 +27,10 @@ export class AppComponent {
   contactsCol: AngularFirestoreCollection<Contact>;
   contacts: any;
 
-  FirstName: string;
-  LastName: string;
+  Firstname: string;
+  Lastname: string;
   Mobile: number;
-  PhoneNumber: number;
+  Phonenumber: number;
   Email: string;
   Address: string;
 
@@ -61,14 +58,14 @@ export class AppComponent {
   addContact(){
   
     //this.afs.collection('contacts').add({'FirstName': this.FirstName, 'LastName': this.LastName, 'Mobile': this.Mobile, 'Phone Number': this.PhoneNumber, 'E-mail': this.Email, 'Address': this.Address});
-    this.afs.collection('contacts').doc('my-custom-id').set({'FirstName': this.FirstName, 'LastName': this.LastName, 'Mobile': this.Mobile, 'PhoneNumber': this.PhoneNumber, 'Email': this.Email, 'Address': this.Address});
+    this.afs.collection('contacts').doc('my-custom-id').set({'FirstName': this.Firstname, 'LastName': this.Lastname, 'Mobile': this.Mobile, 'PhoneNumber': this.Phonenumber, 'Email': this.Email, 'Address': this.Address});
   }
   getContact(contactId){
     this.contactDoc = this.afs.doc('contacts/'+ contactId);
     this.contact = this.contactDoc.valueChanges();
   }
-  deleteContact(contactsId){
-    this.afs.doc('contacts/' + contactsId).delete();
+  deleteContact(contactId){
+    this.afs.doc('contacts/' + contactId).delete();
   }
  
 }

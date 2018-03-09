@@ -1,26 +1,34 @@
-<input type="text" [(ngModel)]="First Name" name="FirstName" placeholder="Enter your first name">
-<input type="text" [(ngModel)]="Last Name" name="LastName" placeholder="Enter your last name">
-<input type="text" [(ngModel)]="Mobile" name="Mobile" placeholder="1234567">
-<input type="text" [(ngModel)]="Phone Number" name="PhoneNumber" placeholder="1234567890">
-<input type="text" [(ngModel)]="E-mail" name="Email" placeholder="Enter your email">
+<input type="text" [(ngModel)]="Firstname" name="Firstname" placeholder="Enter your first name">
+<textarea [(ngModel)]="Lastname" name="Lastname" placeholder="Enter your last name"></textarea>
+<textarea [(ngModel)]="Mobile" name="Mobile" placeholder="1234567"></textarea>
+<textarea [(ngModel)]="Phonenumber" name="Phonenumber" placeholder="1234567890"></textarea>
+<textarea [(ngModel)]="Email" name="Email" placeholder="Enter your email"></textarea>
 <textarea [(ngModel)]="Address" name="Address" placeholder="Enter your address"></textarea>
 <input type="submit" value="Add a contact" (click)= "addContact()">
-<ul *ngFor="let post the contact list | async">
+
+<ul *ngFor="let contact of contact| async">
   <li (click) = "getContact (contact.id)">
-    <strong>{{ contact.data.FirstName}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
-    <strong>{{ contact.data.LastName}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
-    <strong>{{ contact.data.Mobile}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
-    <strong>{{ contact.data.PhoneNumber}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
-    <strong>{{ contact.data.Email}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
-    <strong>{{ contact.data.Address}} (<a href="#" (click)="deletePost(post.id)">delete</a>)</strong>
+    <strong>{{ contact.data.Firstname}} (<a href="#" (click)="deleteContact(contact.id)">delete</a>)</strong>
+    <br>
+    <strong>{{ contact.data.Lastname}} (<a href="#" (click)="deleteContact(contact.id)">delete</a>)</strong>
+    <br>
+    <strong>{{ contact.data.Mobile}} (<a href="#" (click)="deleteContact(contact.id)">delete</a>)</strong>
+    <br>
+    <strong>{{ contact.data.Phonenumber}} (<a href="#" (click)="deleteContact(contact.id)">delete</a>)</strong>
+    <br>
+    <strong>{{ contact.data.Email}} (<a href="#" (click)="deleteContact(contact.id)">delete</a>)</strong>
+    <br>
+    <strong>{{ contact.data.Address}} (<a href="#" (click)="deleteContact(contact.id)">delete</a>)</strong>
     <br>
     {{contact.data.Address}}
   </li>
 </ul>
+
 <h1>A specific contact:</h1>
-<h3> {{contact | async)?.FirstName}}</h3>
-<h3> {{contact| async)?.LastName }}</h3>
-<h3> {{contact| async)?.Mobile }}</h3>
-<h3> {{contact| async)?.PhoneNumber }}</h3>
-<h3> {{contact| async)?.Email }}</h3>
-<p> {{contact| async)?.Address }}</p>
+
+<h3>{{ (singleContact | async)?.Firstname}}</h3>
+<p> {{ (singleContact | async)?.Lastname }}</p>
+<p> {{ (singleContact | async)?.Mobile }}</p>
+<p> {{ (singleContact | async)?.Phonenumber }}</p>
+<p> {{ (singleContact | async)?.Email }}</p>
+<p> {{ (singleContact | async)?.Address }}</p>
